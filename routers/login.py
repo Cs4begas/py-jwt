@@ -1,7 +1,10 @@
 from fastapi import APIRouter
+from fastapi.encoders import jsonable_encoder
 
 from model.login_request import LoginRequest
+from model.login_response import LoginResponse
 from service.jwt import JwtService
+from fastapi.responses import JSONResponse
 
 router = APIRouter(
     tags=["login"],
@@ -11,4 +14,4 @@ jwtService = JwtService()
 
 @router.post("/login", response_model=None)
 async def login(login_request: LoginRequest):
-    jwtService.create_access_token({"user_id": login_request.user})
+    return jwtService.login_access_refresh({"user_id": login_request.user})
