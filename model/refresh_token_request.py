@@ -2,6 +2,5 @@ from attr import dataclass
 from pydantic import BaseModel
 
 
-@dataclass
 class RefreshTokenRequest(BaseModel):
-    token : str
+    refresh_token : str
